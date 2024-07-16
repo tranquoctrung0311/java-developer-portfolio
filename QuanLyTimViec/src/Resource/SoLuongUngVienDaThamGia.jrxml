@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SoLuongUngVienDaThamGia" language="groovy" pageWidth="595" pageHeight="250" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1b65a5a3-681a-4cb6-87f6-ad5ddbd37022">
+	<property name="ireport.zoom" value="2.357947691000002"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<topPen lineWidth="1.0" lineColor="#000000"/>
+			<bottomPen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#00FFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()%2==0)]]></conditionExpression>
+			<style backcolor="#EFFFFF"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="a16fd8ac-e175-48e0-a761-88a3be685db8"/>
+	<parameter name="maCongTy" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select c.companyNo,c.companyName,r.applicantNo
+from register r full outer join interview_schedule its on r.interviewscheduleno = its.interviewscheduleno
+	      full outer join interviewer i on its.interviewerno = i.interviewerno
+	      full outer join company c on i.companyno = c.companyno
+	      full outer join applicant apl on r.applicantNo = apl.ApplicantNo
+where c.companyNo = $P{maCongTy} and r.status in (2,4)]]>
+	</queryString>
+	<field name="COMPANYNO" class="java.math.BigDecimal"/>
+	<field name="COMPANYNAME" class="java.lang.String"/>
+	<field name="APPLICANTNO" class="java.math.BigDecimal"/>
+	<variable name="APPLICANTNO_1" class="java.lang.Integer" resetType="Page" calculation="Count">
+		<variableExpression><![CDATA[$F{APPLICANTNO}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="46" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="39" forecolor="#FFFF00" backcolor="#000000" uuid="b757c8ba-a922-4236-ae20-4fa2d6fa5b1d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SỐ LƯỢNG ỨNG VIÊN ĐÃ HOÀN THÀNH PHỎNG VẤN]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="134" splitType="Stretch">
+			<rectangle>
+				<reportElement x="15" y="0" width="510" height="100" uuid="ce5f5cc8-f1dc-4041-934d-7e3ac989fe2e"/>
+			</rectangle>
+			<staticText>
+				<reportElement mode="Transparent" x="26" y="14" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="e74d1408-50a6-4290-84ac-b2b47d9ee7d6"/>
+				<textElement verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="DejaVu Sans" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Mã công ty:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="26" y="45" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="779aa6c0-a7c7-43ed-a75e-283a9499d5ad"/>
+				<textElement verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="DejaVu Sans" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Tên công ty:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="26" y="78" width="330" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="9172f53f-e5f4-4caa-ae3b-59169db687f6"/>
+				<textElement verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="DejaVu Sans" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Tổng số lượng ứng viên đã hoàn thành phỏng vấn:]]></text>
+			</staticText>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="166" y="14" width="119" height="20" forecolor="#333333" backcolor="#FFFFFF" uuid="7d473e0d-4687-408d-a760-8da7a6431dcd"/>
+				<textElement verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="DejaVu Sans" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{COMPANYNO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="166" y="45" width="119" height="20" uuid="1dde45b0-837d-4cc1-8686-0bc94ca9c440"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{COMPANYNAME}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="455" y="114" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="f7e1e819-69a5-4964-bbf8-62233ccbe1c3"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="11" isBold="false" isItalic="true" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Page" pattern="###0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="373" y="78" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="7d9fee66-10a3-4e4d-818f-fc6491be8b62"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{APPLICANTNO_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+</jasperReport>

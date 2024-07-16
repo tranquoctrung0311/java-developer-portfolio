@@ -1,0 +1,15 @@
+--Tao bang REQUIREMENT
+create table REQUIREMENT (
+	requirementNo NUMBER NOT NULL,
+  	requirementName VARCHAR2(50) NOT NULL UNIQUE
+);
+
+--Khoa chinh
+ALTER TABLE REQUIREMENT ADD CONSTRAINT PK_REQUIREMENT PRIMARY KEY (requirementNo);
+
+--Du lieu
+Insert into REQUIREMENT (REQUIREMENTNO,REQUIREMENTNAME) values (1,'Kế toán');
+Insert into REQUIREMENT (REQUIREMENTNO,REQUIREMENTNAME) values (2,'Quản lý dự án');
+Insert into REQUIREMENT (REQUIREMENTNO,REQUIREMENTNAME) values (3,'Ngoại ngữ');
+Insert into REQUIREMENT (REQUIREMENTNO,REQUIREMENTNAME) values (4,'Tin học văn phong');
+Insert into REQUIREMENT (REQUIREMENTNO,REQUIREMENTNAME) values (5,'Lãnh đạo');

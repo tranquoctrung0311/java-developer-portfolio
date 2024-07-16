@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PhongBan_DaThamGia" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6b38797e-5f61-4326-9bbd-b59e4060d953">
+	<property name="ireport.zoom" value="1.3310000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="maCongTy" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="maPhongBan" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select d.departmentNo, d.departmentName, a.applicantNo,a.applicantName, r.interviewscheduleNo,p.positionName
+from register r join interview_schedule its on r.interviewscheduleno = its.interviewscheduleno
+join interviewer i on its.interviewerno = i.interviewerno
+join department d on r.departmentNo = d.departmentNo
+join applicant a on a.applicantNo = r.applicantNo
+join position p on p.positionNo = r.positionNo
+where i.companyNo = $P{maCongTy} and r.departmentNo = $P{maPhongBan} and r.status in (2,4)
+order by r.interviewscheduleNo, p.positionName,a.applicantNo]]>
+	</queryString>
+	<field name="DEPARTMENTNO" class="java.math.BigDecimal"/>
+	<field name="DEPARTMENTNAME" class="java.lang.String"/>
+	<field name="APPLICANTNO" class="java.math.BigDecimal"/>
+	<field name="APPLICANTNAME" class="java.lang.String"/>
+	<field name="INTERVIEWSCHEDULENO" class="java.math.BigDecimal"/>
+	<field name="POSITIONNAME" class="java.lang.String"/>
+	<variable name="APPLICANTNO_1" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{APPLICANTNO}]]></variableExpression>
+	</variable>
+	<title>
+		<band height="46" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="39" forecolor="#FFFF00" backcolor="#000000" uuid="cae0fd4c-97d2-422f-bfe9-d088d0aba992"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ỨNG VIÊN ĐÃ HOÀN THÀNH PHỎNG VẤN CỦA PHÒNG BAN]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="68" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Transparent" x="27" y="41" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="656c5678-ef32-4511-aa60-140b7f7231e3"/>
+				<textElement verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="DejaVu Sans" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Tên phòng ban:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="27" y="10" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="bcadcee0-5be7-4cf3-aa03-16a211836170"/>
+				<textElement verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="DejaVu Sans" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Mã phòng ban:]]></text>
+			</staticText>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="166" y="10" width="122" height="20" forecolor="#333333" backcolor="#FFFFFF" uuid="cba66e13-c9fc-474c-b098-b07794cf19a2"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="DejaVu Sans" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DEPARTMENTNO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="166" y="41" width="138" height="20" forecolor="#333333" backcolor="#FFFFFF" uuid="633960b5-0c1a-4797-9912-9cb7abd6d967"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="DejaVu Sans" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DEPARTMENTNAME}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement mode="Opaque" x="10" y="63" width="535" height="1" forecolor="#663300" backcolor="#FFFFFF" uuid="a6dd2353-5c66-4e72-b3cd-b580143489af"/>
+				<graphicElement fill="Solid">
+					<pen lineWidth="2.75"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Transparent" x="23" y="6" width="119" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="527a830d-cff6-4046-871c-8e783dab497b"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="DejaVu Sans" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Mã lịch phỏng vấn]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="174" y="6" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="069f367f-a436-4608-ad9e-e30bdeb77144"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="DejaVu Sans" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Vị trí công việc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="304" y="6" width="81" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="6c3cb802-b39f-4192-be49-d87a7139faf4"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="DejaVu Sans" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Mã ứng viên]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="410" y="6" width="135" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="34946cba-fb08-42cc-8fec-aac84b9688b9"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="DejaVu Sans" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Tên ứng viên]]></text>
+			</staticText>
+			<line>
+				<reportElement x="23" y="28" width="513" height="1" forecolor="#663300" uuid="f5240a31-29bd-4632-90ba-3eceae193980"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="29" splitType="Stretch">
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="23" y="6" width="100" height="20" forecolor="#333333" backcolor="#FFFFFF" uuid="3e9ea367-71c4-4411-941b-a54a6350748b"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="DejaVu Sans" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INTERVIEWSCHEDULENO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="174" y="6" width="114" height="20" forecolor="#333333" backcolor="#FFFFFF" uuid="fac0b9f4-74d6-4ae6-8649-1e11adfeecd2"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="DejaVu Sans" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{POSITIONNAME}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="304" y="6" width="81" height="20" forecolor="#333333" backcolor="#FFFFFF" uuid="aab96c02-cca4-447e-ae3f-af3476bc37d3"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="DejaVu Sans" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{APPLICANTNO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="410" y="6" width="135" height="20" forecolor="#333333" backcolor="#FFFFFF" uuid="50c7d72c-dc4b-459d-81e2-672351e05e84"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="DejaVu Sans" size="11" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{APPLICANTNAME}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="24">
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="455" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="a301e62f-76d0-49d9-ac4b-0f9fb053d03c"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="11" isBold="false" isItalic="true" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="266" y="0" width="22" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="60e2b263-126e-461f-828a-1417784628cd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="11" isBold="false" isItalic="true" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="30">
+			<staticText>
+				<reportElement mode="Opaque" x="102" y="4" width="283" height="20" forecolor="#000000" backcolor="#FFFF66" uuid="ea9a2b8d-92f2-4122-84d7-702023c53e6d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="DejaVu Sans" size="11" isBold="true" isItalic="true" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Tổng số ứng viên đã hoàn thành phỏng vấn:]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Opaque" x="410" y="4" width="100" height="20" forecolor="#000000" backcolor="#FFFF66" uuid="cd5cba24-a59d-48fa-807b-73dc94a72ce2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="DejaVu Sans" size="11" isBold="true" isItalic="true" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{APPLICANTNO_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
